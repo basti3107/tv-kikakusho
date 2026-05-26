@@ -1,0 +1,243 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f0f1a;
+  --surface: #1a1a2e;
+  --surface2: #16213e;
+  --accent: #e94560;
+  --accent2: #0f3460;
+  --text: #eaeaea;
+  --text-muted: #8888aa;
+  --border: #2a2a4a;
+  --radius: 12px;
+  --font: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* ヘッダー */
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e94560, #f5a623);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* フォームカード */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 1.5rem; }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+input, textarea, select {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  width: 100%;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #555577;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+/* 生成ボタン */
+.btn-generate {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #e94560, #c0392b);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.05em;
+}
+
+.btn-generate:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ローディング */
+.loading {
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* エラー */
+.error {
+  background: rgba(233, 69, 96, 0.12);
+  border: 1px solid rgba(233, 69, 96, 0.4);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  color: #ff7090;
+  margin-bottom: 1.5rem;
+}
+
+/* 企画書出力 */
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.result-card .result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-card h2 {
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.btn-copy {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-copy:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Markdownレンダリング */
+.proposal-body {
+  font-size: 0.92rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.proposal-body h2 {
+  color: var(--accent);
+  font-size: 1rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--accent);
+}
+
+.proposal-body p {
+  margin-bottom: 0.5rem;
+}

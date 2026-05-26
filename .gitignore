@@ -1,0 +1,14 @@
+# 依存パッケージ
+node_modules/
+
+# ビルド成果物
+.next/
+out/
+
+# 環境変数（APIキーが含まれるため必ずGit管理外に）
+.env.local
+.env*.local
+
+# OS・エディタ
+.DS_Store
+*.swp
