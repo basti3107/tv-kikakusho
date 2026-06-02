@@ -33,7 +33,8 @@ export default async function handler(req, res) {
     if (!response.ok) {
       const errData = await response.json();
       console.error("Gemini APIエラー:", errData);
-      return res.status(500).json({ error: "企画書の生成に失敗しました。しばらく待ってから再試行してください。" });
+      const detail = errData?.error?.message || JSON.stringify(errData);
+      return res.status(500).json({ error: `Gemini APIエラー：${detail}` });
     }
 
     const data = await response.json();
